@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import classNames from "../utils/class-names";
 import useInterval from "../utils/useInterval";
 import { minutesToDuration } from "../utils/duration";
@@ -58,6 +58,8 @@ function Pomodoro() {
   const [focusDuration, setFocusDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
 
+  const [disableStop, setDisableStop] = useState(true);
+
   //increase or decrease focusDuration
   const focusDecrease = () => {
     setFocusDuration(Math.max(5, focusDuration - 5))
@@ -87,7 +89,7 @@ function Pomodoro() {
       }
       return setSession(nextTick);
     },
-    isTimerRunning ? 1000 : null
+    isTimerRunning ? 100 : null // ! return to 1000!
   );
 
   /**
@@ -111,6 +113,15 @@ function Pomodoro() {
       }
       return nextState;
     });
+    setDisableStop(false);
+  }
+
+  function stopClickHandler () {
+    setSession(null);
+    setIsTimerRunning(false);
+    setFocusDuration(25);
+    setBreakDuration(5);
+    setDisableStop(true);
   }
 
   return (
@@ -127,7 +138,7 @@ function Pomodoro() {
                 type="button"
                 className="btn btn-secondary"
                 data-testid="decrease-focus"
-                onClick={focusDecrease}
+                onClick= {focusDecrease}
               >
                 <span className="oi oi-minus" />
               </button>
@@ -136,7 +147,7 @@ function Pomodoro() {
                 type="button"
                 className="btn btn-secondary"
                 data-testid="increase-focus"
-                onClick={focusIncrease}
+                onClick= {focusIncrease}
               >
                 <span className="oi oi-plus" />
               </button>
@@ -155,7 +166,7 @@ function Pomodoro() {
                   type="button"
                   className="btn btn-secondary"
                   data-testid="decrease-break"
-                  onClick={breakDecrease}
+                  onClick= {breakDecrease}
                 >
                   <span className="oi oi-minus" />
                 </button>
@@ -164,7 +175,7 @@ function Pomodoro() {
                   type="button"
                   className="btn btn-secondary"
                   data-testid="increase-break"
-                  onClick={breakIncrease}
+                  onClick= {breakIncrease}
                 >
                   <span className="oi oi-plus" />
                 </button>
@@ -185,7 +196,7 @@ function Pomodoro() {
               className="btn btn-primary"
               data-testid="play-pause"
               title="Start or pause timer"
-              onClick={playPause}
+              onClick= {playPause}
             >
               <span
                 className={classNames({
@@ -202,6 +213,9 @@ function Pomodoro() {
               className="btn btn-secondary"
               data-testid="stop"
               title="Stop the session"
+              onClick= {stopClickHandler}
+              disabled= {disableStop}
+              
             >
               <span className="oi oi-media-stop" />
             </button>
