@@ -41,11 +41,13 @@ function nextSession(focusDuration, breakDuration) {
     if (currentSession.label === "Focusing") {
       return {
         label: "On Break",
+        duration: minutesToDuration(breakDuration),
         timeRemaining: breakDuration * 60,
       };
     }
     return {
       label: "Focusing",
+      duration: minutesToDuration(focusDuration),
       timeRemaining: focusDuration * 60,
     };
   };
@@ -91,7 +93,7 @@ function Pomodoro() {
       
       setProgressBarCurrent(100 * session.timeRemaining / (session.label === "Focusing" ? (focusDuration * 60) : (breakDuration * 60)));
     },
-    isTimerRunning ? 100 : null  //!! reset to 1000 for final version
+    isTimerRunning ? 1000 : null  //!! reset to 1000 for final version
   );
 
   /**
