@@ -2,7 +2,7 @@
 import React from "react"
 import {minutesToDuration} from "../utils/duration"
 
-function Focus({focusIncrease, focusDecrease, focusDuration, isTimerRunning}) {
+export default function Focus({focusIncrease, focusDecrease, focusDuration, isTimerRunning}) {
     return (
     <div className="col">
           <div className="input-group input-group-lg mb-2">
@@ -35,5 +35,3 @@ function Focus({focusIncrease, focusDecrease, focusDuration, isTimerRunning}) {
         </div>
     )
 }
-
-export default Focus;
