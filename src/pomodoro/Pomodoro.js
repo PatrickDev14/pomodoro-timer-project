@@ -5,6 +5,8 @@ import Focus from "./Focus";
 import Break from "./Break";
 import SessionTimer from "./SessionTimer";
 import { minutesToDuration, secondsToDuration } from "../utils/duration";
+import PlayPauseButtons from "./PlayPauseButtons";
+import StopButton from "./StopButton";
 
 // These functions are defined outside of the component to ensure they do not have access to state
 // and are, therefore, more likely to be pure.
@@ -41,13 +43,11 @@ function nextSession(focusDuration, breakDuration) {
     if (currentSession.label === "Focusing") {
       return {
         label: "On Break",
-        duration: minutesToDuration(breakDuration),
         timeRemaining: breakDuration * 60,
       };
     }
     return {
       label: "Focusing",
-      duration: minutesToDuration(focusDuration),
       timeRemaining: focusDuration * 60,
     };
   };
@@ -63,7 +63,8 @@ function Pomodoro() {
   const [focusDuration, setFocusDuration] = useState(25);
   const [breakDuration, setBreakDuration] = useState(5);
 
-  const [progressBarCurrent, setProgressBarCurrent] = useState(0);
+  //track the progress value for the progress bar
+  const [progressPercent, setProgressPercent] = useState(0);
 
   const focusDecrease = () => {
     setFocusDuration(Math.max(5, focusDuration - 5));
@@ -87,11 +88,12 @@ function Pomodoro() {
   useInterval(() => {
       if (session.timeRemaining === 0) {
         new Audio("https://bigsoundbank.com/UPLOAD/mp3/1482.mp3").play();
-        setSession(nextSession(focusDuration, breakDuration));
+        return setSession(nextSession(focusDuration, breakDuration));
       }
-      setSession(nextTick);
+      setProgressPercent(100 - (100 * session.timeRemaining / (session.label === "Focusing" ? (focusDuration * 60) : (breakDuration * 60))));
+
+      return setSession(nextTick);
       
-      setProgressBarCurrent(100 * session.timeRemaining / (session.label === "Focusing" ? (focusDuration * 60) : (breakDuration * 60)));
     },
     isTimerRunning ? 1000 : null  //!! reset to 1000 for final version
   );
@@ -129,50 +131,33 @@ function Pomodoro() {
     <div className="pomodoro">
       <div className="row">
         <Focus 
-        focusIncrease = {focusIncrease}
-        focusDecrease = {focusDecrease}
-        focusDuration = {focusDuration}
-        isTimerRunning = {isTimerRunning} />
+          focusIncrease = {focusIncrease}
+          focusDecrease = {focusDecrease}
+          focusDuration = {focusDuration}
+          isTimerRunning = {isTimerRunning} 
+          />
         <Break 
-        breakIncrease = {breakIncrease}
-        breakDecrease = {breakDecrease}
-        breakDuration = {breakDuration}
-        isTimerRunning = {isTimerRunning} />
+          breakIncrease = {breakIncrease}
+          breakDecrease = {breakDecrease}
+          breakDuration = {breakDuration}
+          isTimerRunning = {isTimerRunning} 
+          />
       </div>
       <div className="row">
         <div className="col">
           <div
-            className="btn-group btn-group-lg mb-2"
-            role="group"
-            aria-label="Timer controls"
-          >
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-testid="play-pause"
-              title="Start or pause timer"
-              onClick={playPause}
+              className="btn-group btn-group-lg mb-2"
+              role="group"
+              aria-label="Timer controls"
             >
-              <span
-                className={classNames({
-                  oi: true,
-                  "oi-media-play": !isTimerRunning,
-                  "oi-media-pause": isTimerRunning,
-                })}
+            <PlayPauseButtons
+              playPause={playPause}
+              isTimerRunning={isTimerRunning} 
               />
-            </button>
-            {/* TODO: Implement stopping the current focus or break session. and disable the stop button when there is no active session */}
-            {/* TODO: Disable the stop button when there is no active session */}
-            <button
-              type="button"
-              className="btn btn-secondary"
-              data-testid="stop"
-              title="Stop the session"
-              disabled={!isTimerRunning}
-              onClick={stopButtonHandler}
-            >
-              <span className="oi oi-media-stop" />
-            </button>
+            <StopButton
+              isTimerRunning={isTimerRunning}
+              stopButtonHandler={stopButtonHandler} 
+              />
           </div>
         </div>
       </div>
@@ -180,7 +165,8 @@ function Pomodoro() {
         session = {session}
         focusDuration = {focusDuration}
         breakDuration = {breakDuration}
-        progressBarCurrent = {progressBarCurrent}
+        isTimerRunning = {isTimerRunning}
+        currentProgress = {progressPercent}
         />
     </div>
   );
