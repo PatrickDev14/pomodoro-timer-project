@@ -7,7 +7,7 @@ import { minutesToDuration, secondsToDuration } from '../utils/duration';
 export default function SessionTimer({ session, focusDuration, breakDuration, isTimerRunning, currentProgress }) {
 
     return (
-      <div>
+      <>
         {/* TODO: This area should show only when there is an active focus or break - i.e. the session is running or is paused */}
         {session && (
           <div>
@@ -42,6 +42,6 @@ export default function SessionTimer({ session, focusDuration, breakDuration, is
             </div>
           </div>
         )}
-      </div>
+      </>
     )
 }
