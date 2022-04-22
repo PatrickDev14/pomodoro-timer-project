@@ -22,7 +22,7 @@ and a break duration.
 
 
 
-## Features
+## Methods
 
 - implements start, stop, and pause logic through event handlers
 - utilizes state across multiple components
