@@ -2,7 +2,7 @@
 
 Pomodoro timer is an app for users that need a timer tool when they use the pomodoro method for 
 daily productivity in work or study. Users can select their desired length for a focus duration,
-and a break duration.
+and a break duration. This project was built as a React single page application (SPA).
 
 
 ## Demo
@@ -14,7 +14,7 @@ and a break duration.
 
 **Built with:**  
 
- React, JSX, HTML, BootstrapCSS
+ React, JSX, HTML, Bootstrap, CSS
 
  **Tools:** 
  

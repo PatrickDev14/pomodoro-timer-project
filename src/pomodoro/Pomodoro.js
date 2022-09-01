@@ -129,7 +129,7 @@ function Pomodoro() {
 
   return (
     <div className="pomodoro">
-      <div className="row">
+      <div className="row mb-3">
         <Focus 
           focusIncrease = {focusIncrease}
           focusDecrease = {focusDecrease}
@@ -143,22 +143,20 @@ function Pomodoro() {
           isTimerRunning = {isTimerRunning} 
           />
       </div>
-      <div className="row">
-        <div className="col">
-          <div
-              className="btn-group btn-group-lg mb-2"
-              role="group"
-              aria-label="Timer controls"
-            >
-            <PlayPauseButtons
-              playPause={playPause}
-              isTimerRunning={isTimerRunning} 
-              />
-            <StopButton
-              isTimerRunning={isTimerRunning}
-              stopButtonHandler={stopButtonHandler} 
-              />
-          </div>
+      <div className="row justify-content-center">
+        <div
+          className="btn-group btn-group-lg mb-4"
+          role="group"
+          aria-label="Timer controls"
+          >
+          <PlayPauseButtons
+            playPause={playPause}
+            isTimerRunning={isTimerRunning} 
+            />
+          <StopButton
+            isTimerRunning={isTimerRunning}
+            stopButtonHandler={stopButtonHandler} 
+            />
         </div>
       </div>
       <SessionTimer

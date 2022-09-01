@@ -1,3 +1,28 @@
 .App {
   text-align: center;
 }
+
+body {
+  width: 100%;
+  height: 100vh;
+  background: url("./images/forest-haze-1080.jpg") top right no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+
+/* @media (min-width: 992px) {
+  body {
+    padding-left: 160px;
+  }
+} */
+
+body:before {
+  content: "";
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
