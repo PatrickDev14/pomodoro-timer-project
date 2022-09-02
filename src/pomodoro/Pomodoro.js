@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import classNames from "../utils/class-names";
 import useInterval from "../utils/useInterval";
 import Focus from "./Focus";
 import Break from "./Break";
 import SessionTimer from "./SessionTimer";
-import { minutesToDuration, secondsToDuration } from "../utils/duration";
 import PlayPauseButtons from "./PlayPauseButtons";
 import StopButton from "./StopButton";
 
