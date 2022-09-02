@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.07c5d737.css",
+    "main.js": "/static/js/main.0b58ae87.js",
+    "static/media/forest-haze-1080.jpg": "/static/media/forest-haze-1080.de0815baddad115a9413.jpg",
+    "index.html": "/index.html",
+    "main.07c5d737.css.map": "/static/css/main.07c5d737.css.map",
+    "main.0b58ae87.js.map": "/static/js/main.0b58ae87.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07c5d737.css",
+    "static/js/main.0b58ae87.js"
+  ]
+}

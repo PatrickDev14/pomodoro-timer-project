@@ -7,7 +7,7 @@ and a break duration. This project was built as a React single page application 
 
 ## Demo
 
-[Live demo](https://project-pomodoro-timer-qualified-patrick-lauher-solution.vercel.app/)
+[Live demo](https://pomodoro-timer-patrickdev14.vercel.app/)
 
 
 ## Tech Stack
